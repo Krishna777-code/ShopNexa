@@ -1,0 +1,30 @@
+services:
+  # Express Backend Web Service
+  - type: web
+    name: emerald-disk-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false # User will set this in Render UI (e.g. MongoDB Atlas URI)
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Vite Frontend Static Site
+  - type: web
+    name: emerald-disk-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    routes:
+      - type: rewrite
+        path: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://emerald-disk-backend.onrender.com/api # Replace with actual backend URL if backend name differs
