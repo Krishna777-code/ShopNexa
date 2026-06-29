@@ -30,7 +30,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await api.get(`${import.meta.env.VITE_API_URL}/products`);
+        const { data } = await api.get("/products");
         setProducts(data);
         setFiltered(data);
       } catch (err) {
