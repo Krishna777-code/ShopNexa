@@ -10,7 +10,7 @@ services:
       - key: PORT
         value: 5000
       - key: MONGODB_URI
-        sync: false # User will set this in Render UI (e.g. MongoDB Atlas URI)
+        sync: mongodb://localhost:27017/marketplace
       - key: JWT_SECRET
         generateValue: true
 
